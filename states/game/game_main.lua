@@ -53,15 +53,6 @@ function Main:enteredState(level_name)
   player1.fixture = love.physics.newFixture(player1.body, player1.shape)
   player1.fixture:setUserData(player1)
   player1.fixture:setFriction(1)
-  function player1:draw()
-    local x, y = self.body:getWorldCenter()
-    g.setColor(COLORS.white:rgb())
-    if self.current_anim then
-      self.current_anim:draw(x, y, self.body:getAngle(), 1, 1, radius / 2, radius / 2)
-    else
-      g.draw(self.image, x, y, self.body:getAngle(), 1, 1, radius / 2, radius / 2)
-    end
-  end
   player1.controls = {
     w = PlayerCharacter.up,
     a = PlayerCharacter.left,
@@ -90,15 +81,6 @@ function Main:enteredState(level_name)
   player2.fixture:setUserData(player2)
   player2.fixture:setFriction(1)
   player2.body:setAngularDamping(2)
-  function player2:draw()
-    local x, y = self.body:getWorldCenter()
-    g.setColor(COLORS.white:rgb())
-    if self.current_anim then
-      self.current_anim:draw(x, y, self.body:getAngle(), 1, 1, radius / 2, radius / 2)
-    else
-      g.draw(self.image, x, y, self.body:getAngle(), 1, 1, radius / 2, radius / 2)
-    end
-  end
   player2.controls = {
     up = PlayerCharacter.up,
     left = PlayerCharacter.left,

@@ -49,6 +49,16 @@ function PlayerCharacter:update(dt)
   if self.current_anim then self.current_anim:update(dt) end
 end
 
+function PlayerCharacter:draw()
+  local x, y = self.body:getWorldCenter()
+  g.setColor(COLORS.white:rgb())
+  if self.current_anim then
+    self.current_anim:draw(x, y, self.body:getAngle(), 1, 1, radius / 2, radius / 2)
+  else
+    g.draw(self.image, x, y, self.body:getAngle(), 1, 1, radius / 2, radius / 2)
+  end
+end
+
 function PlayerCharacter:up(dt)
   if self.can_jump then
     if self.player_name == "circle" then
