@@ -55,7 +55,8 @@ function Menu:draw()
       g.setColor(COLORS.yellow:rgb())
       local old_width = g.getLineWidth()
       g.setLineWidth(2)
-      g.rectangle("line", g.getWidth() / 3, y - 2, g.getWidth() / 3, dy)
+      local width = self.menu_font:getWidth(name)
+      g.rectangle("line", g.getWidth() / 2 - width / 2 - 2, y - 2, width + 4, dy)
       g.setLineWidth(old_width)
     end
   end
