@@ -214,10 +214,10 @@ end
 function Main:keyreleased(key, unicode)
 end
 
-function Main:joystickpressed(joystick, button)
-  if button == 9 then
+function Main:gamepadpressed(joystick, button)
+  if button == "start" then
     self:gotoState("Main", self.level_name)
-  elseif button == 10 then
+  elseif button == "back" then
     self:gotoState("Menu")
   end
 end
