@@ -29,7 +29,7 @@ function PlayerCharacter:update(dt)
     self.body:applyLinearImpulse(-x * -20 * dt, 0)
 
     for key,action in pairs(self.controls.joystick) do
-      if self.joystick:isDown(key) then
+      if self.joystick:isGamepadDown(key) then
         action(self, dt)
       end
     end

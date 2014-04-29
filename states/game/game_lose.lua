@@ -28,7 +28,7 @@ function Lose:keypressed(key, unicode)
   bgm:play()
 end
 
-function Lose:joystickpressed(joystick, button)
+function Lose:gamepadpressed(joystick, button)
   if self.waiting then return end
   self:gotoState("Main", self.level_name)
 end

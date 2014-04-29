@@ -85,14 +85,14 @@ function Menu:keypressed(key, unicode)
   self.selected_level_index = math.clamp(1, self.selected_level_index, #self.sorted_names)
 end
 
-function Menu:joystickpressed(joystick, button)
-  if button == 12 then
+function Menu:gamepadpressed(joystick, button)
+  if button == "dpup" then
     love.event.push("keypressed", "up")
-  elseif button == 13 then
+  elseif button == "dpdown" then
     love.event.push("keypressed", "down")
-  elseif button == 1 then
+  elseif button == "a" then
     love.event.push("keypressed", "return")
-  elseif button == 10 then
+  elseif button == "b" or button == "back" then
     love.event.push("keypressed", "escape")
   end
 end

@@ -58,9 +58,9 @@ function Main:enteredState(level_name)
     a = PlayerCharacter.left,
     d = PlayerCharacter.right,
     joystick = {
-      [1] = PlayerCharacter.up,
-      [14] = PlayerCharacter.left,
-      [15] = PlayerCharacter.right
+      a = PlayerCharacter.up,
+      dpleft = PlayerCharacter.left,
+      dpright = PlayerCharacter.right
     }
   }
 
@@ -86,9 +86,9 @@ function Main:enteredState(level_name)
     left = PlayerCharacter.left,
     right = PlayerCharacter.right,
     joystick = {
-      [1] = PlayerCharacter.up,
-      [14] = PlayerCharacter.left,
-      [15] = PlayerCharacter.right
+      a = PlayerCharacter.up,
+      dpleft = PlayerCharacter.left,
+      dpright = PlayerCharacter.right
     }
   }
 

@@ -27,7 +27,7 @@ function Win:keypressed(key, unicode)
   self:gotoState("Menu")
 end
 
-function Win:joystickpressed(joystick, button)
+function Win:gamepadpressed(joystick, button)
   if self.waiting then return end
   self:gotoState("Menu")
 end

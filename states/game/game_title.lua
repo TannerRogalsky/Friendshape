@@ -21,8 +21,8 @@ function Title:keypressed(key, unicode)
   end
 end
 
-function Title:joystickpressed(joystick, button)
-  if button == 10 then
+function Title:gamepadpressed(joystick, button)
+  if button == "back" then
       love.event.quit()
   else
     self:gotoState("Menu")
