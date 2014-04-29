@@ -9,6 +9,8 @@ PlayerCharacter.static.instances = {}
 function PlayerCharacter:initialize(x, y, w, h)
   Base.initialize(self)
 
+  self.width, self.height = w, h
+
   self.can_jump = false
 
   PlayerCharacter.instances[self.id] = self
@@ -53,9 +55,9 @@ function PlayerCharacter:draw()
   local x, y = self.body:getWorldCenter()
   g.setColor(COLORS.white:rgb())
   if self.current_anim then
-    self.current_anim:draw(x, y, self.body:getAngle(), 1, 1, radius / 2, radius / 2)
+    self.current_anim:draw(x, y, self.body:getAngle(), 1, 1, self.width / 2, self.height / 2)
   else
-    g.draw(self.image, x, y, self.body:getAngle(), 1, 1, radius / 2, radius / 2)
+    g.draw(self.image, x, y, self.body:getAngle(), 1, 1, self.width / 2, self.height / 2)
   end
 end
 
