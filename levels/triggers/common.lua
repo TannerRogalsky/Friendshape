@@ -1,10 +1,12 @@
 local triggers = {}
 
-local coin1 = love.audio.newSource( "/sounds/block1.ogg", "static" )
-coin1:setVolume(0.2)
-
-local coin2 = love.audio.newSource( "/sounds/block2.ogg", "static" )
-coin2:setVolume(0.2)
+local coin_sounds = {
+  love.audio.newSource("/sounds/block1.ogg", "static"),
+  love.audio.newSource("/sounds/block2.ogg", "static")
+}
+for _,coin_sound in ipairs(coin_sounds) do
+  coin_sound:setVolume(0.2)
+end
 
 local curcoin = 0
 
@@ -28,15 +30,10 @@ function triggers.coin_enter(coin, object)
     return
   end
 
-  if curcoin == 0 then
-    love.audio.stop(coin1)
-    love.audio.play(coin1)
-    curcoin = curcoin + 1
-  else
-    love.audio.stop(coin2)
-    love.audio.play(coin2)
-    curcoin = 0
-  end
+  local coin_sound = coin_sounds[curcoin % #coin_sounds + 1]
+  coin_sound:stop()
+  coin_sound:play()
+  curcoin = curcoin + 1
 
   level.triggers[coin] = nil
   coin.body:destroy()
