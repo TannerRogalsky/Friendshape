@@ -11,7 +11,7 @@ friendsound:setVolume(0.1)
 bgm = love.audio.newSource("/sounds/music1.ogg", "stream")
 
 
-function Menu:enteredState()
+function Menu:enteredState(previous_level_name)
   self.menu_font = g.newFont("fonts/04b03.TTF", 48)
   g.setFont(self.menu_font)
 
@@ -22,7 +22,7 @@ function Menu:enteredState()
   table.sort(self.sorted_names)
 
   self.all_levels = {}
-  for _, name in pairs(self.sorted_names) do
+  for index, name in pairs(self.sorted_names) do
     local level = g.newCanvas()
     g.setCanvas(level)
     g.setColor(COLORS.white:rgb())
@@ -35,10 +35,13 @@ function Menu:enteredState()
     g.draw(tile_layers["Foreground"].sprite_batch, 0, 0, 0, level_data.scale, level_data.scale)
     g.setCanvas()
     self.all_levels[name] = level
+
+    if previous_level_name == name then
+      self.selected_level_index = index
+    end
   end
 
-  self.selected_level_index = 1
-
+  self.selected_level_index = self.selected_level_index or 1
 end
 
 function Menu:draw()

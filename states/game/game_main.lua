@@ -212,7 +212,7 @@ function Main:keypressed(key, unicode)
     friendsound:rewind()
     friendsound:play()
   elseif key == "escape" then
-    self:gotoState("Menu")
+    self:gotoState("Menu", self.level_name)
   end
 end
 
@@ -223,7 +223,7 @@ function Main:gamepadpressed(joystick, button)
   if button == "start" then
     self:gotoState("Main", self.level_name)
   elseif button == "back" then
-    self:gotoState("Menu")
+    self:gotoState("Menu", self.level_name)
   end
 end
 

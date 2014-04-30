@@ -24,12 +24,12 @@ end
 
 function Win:keypressed(key, unicode)
   if self.waiting then return end
-  self:gotoState("Menu")
+  self:gotoState("Menu", self.level_name)
 end
 
 function Win:gamepadpressed(joystick, button)
   if self.waiting then return end
-  self:gotoState("Menu")
+  self:gotoState("Menu", self.level_name)
 end
 
 function Win:exitedState()
