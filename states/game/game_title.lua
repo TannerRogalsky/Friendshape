@@ -22,7 +22,7 @@ function Title:keypressed(key, unicode)
 end
 
 function Title:gamepadpressed(joystick, button)
-  if button == "back" then
+  if button == "back" or button == "b" then
       love.event.quit()
   else
     self:gotoState("Menu")
