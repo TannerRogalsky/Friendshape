@@ -23,11 +23,9 @@ function Loading:enteredState()
   --   end
   -- end
 
-  for index, level in ipairs(love.filesystem.getDirectoryItems('levels')) do
-    local level_name = level:match("(.*).lua$")
-    if level_name then
-      self.preloaded_levels[level_name] = require("levels/" .. level_name)
-    end
+  self.sorted_names = require('levels/list')
+  for index, level_name in ipairs(self.sorted_names) do
+    self.preloaded_levels[level_name] = require("levels/" .. level_name)
   end
 
   self.loader.start(function()

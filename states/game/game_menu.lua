@@ -15,12 +15,6 @@ function Menu:enteredState(previous_level_name)
   self.menu_font = g.newFont("fonts/04b03.TTF", 48)
   g.setFont(self.menu_font)
 
-  self.sorted_names = {}
-  for name,_ in pairs(self.preloaded_levels) do
-    table.insert(self.sorted_names, name)
-  end
-  table.sort(self.sorted_names)
-
   self.all_levels = {}
   for index, name in pairs(self.sorted_names) do
     local level = g.newCanvas()
