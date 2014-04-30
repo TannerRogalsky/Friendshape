@@ -5,7 +5,7 @@
   <property name="player2_pos" value="3,3"/>
   <property name="scale" value="3"/>
  </properties>
- <tileset firstgid="1" source="../../../Desktop/love2d_template-tojam9/images/tiles.tsx"/>
+ <tileset firstgid="1" source="../images/tiles.tsx"/>
  <layer name="Background" width="80" height="60">
   <data encoding="base64" compression="zlib">
    eJzt1DEBAAAIw7D5F4kWXLCDREGvJgBMOwCgzAeB73wQ+M4HAQAAAAAAAAAAAAAAALi20GgDeQ==
