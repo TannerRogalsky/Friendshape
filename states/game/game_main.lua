@@ -108,20 +108,25 @@ function Main:enteredState(level_name)
   for _,image in ipairs(cloud_images) do
     image:setFilter("nearest", "nearest")
   end
-  local function spawn_cloud()
-    local x, y, w, h = self.camera:getViewport()
+  local function spawn_cloud(x, y)
     local cloud = {
       image = cloud_images[math.random(#cloud_images)],
-      position = {
-        x = x + w,
-        y = y + math.random(h)
-      },
+      position = { x = x, y = y },
       vx = -math.random() * 50 - 50,
-      scale = math.random(4)
+      scale = math.random(3)
     }
     self.clouds[cloud] = cloud
   end
-  cron.every(3, spawn_cloud)
+  local function spawn_left()
+    local x, y, w, h = self.camera:getViewport()
+    spawn_cloud(x + w, y + math.random(h))
+  end
+  cron.every(3, spawn_left)
+  spawn_left()
+  for i=1,5 do
+    local x, y, w, h = self.camera:getViewport()
+    spawn_cloud(math.random(w), math.random(h))
+  end
 end
 
 function Main:update(dt)
@@ -229,6 +234,7 @@ function Main:focus(has_focus)
 end
 
 function Main:exitedState()
+  cron.reset()
   self.final_screen = g.newImage(g.newScreenshot())
   World:destroy()
   World = nil
