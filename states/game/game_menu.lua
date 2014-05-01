@@ -36,6 +36,17 @@ function Menu:enteredState(previous_level_name)
   end
 
   self.selected_level_index = self.selected_level_index or 1
+
+  cron.every(0.3, function()
+    for _,joystick in ipairs(love.joystick:getJoysticks()) do
+      local x, y = joystick:getAxis(1)
+      if y > 0.5 then
+        love.event.push("keypressed", "up")
+      elseif y < -0.5 then
+        love.event.push("keypressed", "down")
+      end
+    end
+  end)
 end
 
 function Menu:draw()
@@ -96,6 +107,7 @@ function Menu:gamepadpressed(joystick, button)
 end
 
 function Menu:exitedState()
+  cron.reset()
   self.selected_level_index = nil
   self.all_levels = nil
 end
