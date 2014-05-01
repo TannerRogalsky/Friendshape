@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="21" tileheight="21">
+<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="21" tileheight="21">
  <properties>
-  <property name="player1_pos" value="9,10"/>
-  <property name="player2_pos" value="7,10"/>
+  <property name="order" value="1"/>
+  <property name="player1_pos" value="9,2"/>
+  <property name="player2_pos" value="7,2"/>
   <property name="scale" value="3"/>
  </properties>
  <tileset firstgid="1" source="../images/tiles.tsx"/>
- <layer name="Background" width="40" height="40">
+ <layer name="Background" width="20" height="20">
   <data encoding="base64" compression="zlib">
-   eJzt07EJACEQRUFrsGVt864WcyMFZVVmkp8+FjYlAFjvjw5gixwdMODr9lQ33JI3leiAi+VumVejA9jKbwAAp2myjAP6
+   eJxjYBja4N5AO4BOQIgGZt5Fo6kFaOHWkQKaB9oBeIAQGj0YQctAO4DOYKDjAgAs+QP6
   </data>
  </layer>
- <layer name="Foreground" width="40" height="40">
+ <layer name="Foreground" width="20" height="20">
   <properties>
    <property name="physics" value="true"/>
   </properties>
   <data encoding="base64" compression="zlib">
-   eJzt1csJgEAMBNBsB37asiIRtA2P2oCeBK3Dg+WYRb2EvUpGnAdD0NOQVVaEiIi+Zrrn7Nriu3ZNozm8iyRM5hnpjOPe7M5S77yh/h/Pd2eDtj90rVxn3Dn3SIm9ejPR9Gaiib0Gwe23aFbN5l2EXhHvjVHw7o9HEURqnWXwbpKWaa9Kk4P2IyIion86AdxoGuQ=
+   eJxjYKAfWA+lN9DRTlLAFSCuAeIbVDBrPRqfEj+D3IXuJmxipAJqxQcs3NAxNcKRmqCeAeLnBiqYBTJnJhpNKZiJRlPDvIVUNG8bEO8E4l1UMm+wA1C+WMRAvfJKiJGBoQpICzNSxzwBoDk+QCxIJfPIAQBgQhrk
   </data>
  </layer>
- <objectgroup name="Physics" width="40" height="40">
-  <object x="147" y="231">
+ <objectgroup name="Physics" width="20" height="20">
+  <object x="147" y="63">
    <polygon points="0,0 63,0 46,12 15,12"/>
   </object>
-  <object x="105" y="273">
+  <object x="105" y="105">
    <polygon points="0,0 42,0 30,9 10,12"/>
   </object>
-  <object x="105" y="315">
+  <object x="105" y="147">
    <polygon points="0,0 21,0 21,13"/>
   </object>
-  <object x="231" y="315">
+  <object x="231" y="147">
    <polygon points="0,0 21,0 0,12"/>
   </object>
-  <object x="147" y="315">
+  <object x="147" y="147">
    <polygon points="-20,0 84,0 84,12 -21,12"/>
   </object>
-  <object x="210" y="273">
+  <object x="210" y="105">
    <polygon points="0,0 42,0 23,12 6,8"/>
   </object>
-  <object x="147" y="357">
+  <object x="147" y="189">
    <polygon points="0,21 0,84 22,106 21,0"/>
   </object>
-  <object x="189" y="378">
+  <object x="189" y="210">
    <polygon points="1,85 21,64 20,0 0,-21"/>
   </object>
-  <object x="168" y="441" width="21" height="21"/>
-  <object x="168" y="525">
+  <object x="168" y="273" width="21" height="21"/>
+  <object x="168" y="357">
    <polygon points="0,0 -11,13 -9,28 1,33 21,33 29,27 31,12 21,0"/>
   </object>
  </objectgroup>
- <objectgroup name="Triggers" width="40" height="40">
-  <object x="168" y="504" width="21" height="21">
+ <objectgroup name="Triggers" width="20" height="20">
+  <object x="168" y="336" width="21" height="21">
    <properties>
     <property name="player" value="square"/>
     <property name="type" value="Goal"/>
    </properties>
   </object>
-  <object x="168" y="420" width="21" height="21">
+  <object x="168" y="252" width="21" height="21">
    <properties>
     <property name="player" value="circle"/>
     <property name="type" value="Goal"/>
    </properties>
   </object>
-  <object x="193" y="200">
+  <object x="193" y="32">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -72,7 +73,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="214" y="262">
+  <object x="214" y="94">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -82,7 +83,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="194" y="306">
+  <object x="194" y="138">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -92,7 +93,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="193" y="515">
+  <object x="193" y="347">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -102,7 +103,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="151" y="515">
+  <object x="151" y="347">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -112,7 +113,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="151" y="200">
+  <object x="151" y="32">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -122,7 +123,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="130" y="263">
+  <object x="130" y="95">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -132,7 +133,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="151" y="305">
+  <object x="151" y="137">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -142,7 +143,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="172" y="390">
+  <object x="172" y="222">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -152,7 +153,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="172" y="368">
+  <object x="172" y="200">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -162,7 +163,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="214" y="389">
+  <object x="214" y="221">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -172,7 +173,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="130" y="389">
+  <object x="130" y="221">
    <properties>
     <property name="amplitude" value="1"/>
     <property name="on_enter" value="coin_enter"/>
@@ -182,7 +183,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="173" y="494">
+  <object x="173" y="326">
    <properties>
     <property name="amplitude" value="2"/>
     <property name="on_update" value="bounce_animation"/>
@@ -190,7 +191,7 @@
    </properties>
    <polygon points="2,-1 4,-5 10,-4 10,0 5,4"/>
   </object>
-  <object x="172" y="410">
+  <object x="172" y="242">
    <properties>
     <property name="amplitude" value="2"/>
     <property name="on_update" value="bounce_animation"/>
