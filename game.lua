@@ -7,6 +7,23 @@ function Game:initialize(args)
     self[k] = v
   end
 
+  local joysticks = love.joystick.getJoysticks()
+  for i, joystick in ipairs(joysticks) do
+    if joystick:getName() == "OUYA Game Controller" then
+      local guid = joystick:getGUID()
+      love.joystick.setGamepadMapping(guid, "a", "button", 1)
+      love.joystick.setGamepadMapping(guid, "b", "button", 2)
+      love.joystick.setGamepadMapping(guid, "x", "button", 3)
+      love.joystick.setGamepadMapping(guid, "y", "button", 4)
+      love.joystick.setGamepadMapping(guid, "dpup", "button", 12)
+      love.joystick.setGamepadMapping(guid, "dpdown", "button", 13)
+      love.joystick.setGamepadMapping(guid, "dpleft", "button", 14)
+      love.joystick.setGamepadMapping(guid, "dpright", "button", 15)
+      love.joystick.setGamepadMapping(guid, "back", "button", 10)
+      love.joystick.setGamepadMapping(guid, "start", "button", 11)
+    end
+  end
+
   self:gotoState("Loading")
 end
 
