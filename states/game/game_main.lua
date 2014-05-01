@@ -222,7 +222,7 @@ end
 function Main:gamepadpressed(joystick, button)
   if button == "start" then
     self:gotoState("Main", self.level_name)
-  elseif button == "back" then
+  elseif button == "back" or button == "b" then
     self:gotoState("Menu", self.level_name)
   end
 end
