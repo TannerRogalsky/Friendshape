@@ -39,11 +39,11 @@ function Menu:enteredState(previous_level_name)
 
   cron.every(0.3, function()
     for _,joystick in ipairs(love.joystick:getJoysticks()) do
-      local x, y = joystick:getAxis(1)
+      local x, y = joystick:getAxes()
       if y > 0.5 then
-        love.event.push("keypressed", "up")
-      elseif y < -0.5 then
         love.event.push("keypressed", "down")
+      elseif y < -0.5 then
+        love.event.push("keypressed", "up")
       end
     end
   end)
