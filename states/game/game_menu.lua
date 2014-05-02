@@ -36,17 +36,6 @@ function Menu:enteredState(previous_level_name)
   end
 
   self.selected_level_index = self.selected_level_index or 1
-
-  cron.every(0.3, function()
-    for _,joystick in ipairs(love.joystick:getJoysticks()) do
-      local x, y = joystick:getAxes()
-      if y > 0.5 then
-        love.event.push("keypressed", "down")
-      elseif y < -0.5 then
-        love.event.push("keypressed", "up")
-      end
-    end
-  end)
 end
 
 function Menu:draw()
@@ -94,6 +83,18 @@ function Menu:keypressed(key, unicode)
   self.selected_level_index = math.clamp(1, self.selected_level_index, #self.sorted_names)
 end
 
+function Menu:joystickaxis(joystick, axis, value)
+  if axis == 2 then
+    if math.abs(value) > 0.5 and self.polling == nil then
+      poll_joystick()
+      self.polling = cron.every(0.3, poll_joystick)
+    elseif math.abs(value) <= 0.5 and self.polling then
+      cron.cancel(self.polling)
+      self.polling = nil
+    end
+  end
+end
+
 function Menu:gamepadpressed(joystick, button)
   if button == "dpup" then
     love.event.push("keypressed", "up")
@@ -106,8 +107,20 @@ function Menu:gamepadpressed(joystick, button)
   end
 end
 
+function poll_joystick()
+  for _,joystick in ipairs(love.joystick:getJoysticks()) do
+    local x, y = joystick:getAxes()
+    if y > 0.5 then
+      love.event.push("keypressed", "down")
+    elseif y < -0.5 then
+      love.event.push("keypressed", "up")
+    end
+  end
+end
+
 function Menu:exitedState()
   cron.reset()
+  self.polling = nil
   self.selected_level_index = nil
   self.all_levels = nil
 end
