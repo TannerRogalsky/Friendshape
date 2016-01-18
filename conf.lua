@@ -1,7 +1,7 @@
 function love.conf(t)
   t.author = "Tanner Rogalsky"
   t.identity = "friendshape"                   -- The name of the save directory (string)
-  t.version = "0.9.0"                -- The LÖVE version this game was made for (string)
+  t.version = "0.10.0"                -- The LÖVE version this game was made for (string)
   t.console = false                  -- Attach a console (boolean, Windows only)
 
   t.window.title = "Friendshape"        -- The window title (string)

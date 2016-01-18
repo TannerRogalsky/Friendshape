@@ -43,7 +43,6 @@ function MapLoader.load(map_name)
     local sprite_batch = g.newSpriteBatch(tileset_data.created_image, map_data.width * map_data.height, "dynamic")
     local sprite_lookup = DictGrid:new()
     local quad_lookup = DictGrid:new()
-    sprite_batch:bind()
     local data_index = 0
     for y=0,tiles_metadata.height - 1 do
       for x=0,tiles_metadata.width - 1 do
@@ -59,7 +58,6 @@ function MapLoader.load(map_name)
         end
       end
     end
-    sprite_batch:unbind()
     map_area.tile_layers[name] = {}
     map_area.tile_layers[name].quad_lookup = quad_lookup
     map_area.tile_layers[name].sprite_lookup = sprite_lookup
