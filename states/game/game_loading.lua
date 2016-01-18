@@ -5,11 +5,24 @@ function Loading:enteredState()
   self.preloaded_images = {}
   self.preloaded_fonts = {}
   self.preloaded_levels = {}
+  self.preloaded_audio = {}
 
   -- puts loaded images into the preloaded_images hash with they key being the file name
   for index, image in ipairs(love.filesystem.getDirectoryItems('images')) do
     if image:match('(.*).png$') ~= nil or image:match('(.*).gif$') ~= nil or image:match('(.*).jpg$') ~= nil then
       self.loader.newImage(self.preloaded_images, image, 'images/' .. image)
+    end
+  end
+
+  for index, source in ipairs(love.filesystem.getDirectoryItems('sounds')) do
+    if source:match('(.*).ogg$') ~= nil then
+      self.loader.newSource(self.preloaded_audio, source, 'sounds/' .. source, 'source')
+    end
+  end
+
+  for index, source in ipairs(love.filesystem.getDirectoryItems('music')) do
+    if source:match('(.*).ogg$') ~= nil then
+      self.loader.newSource(self.preloaded_audio, source, 'music/' .. source, 'stream')
     end
   end
 

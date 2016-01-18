@@ -1,15 +1,14 @@
 local Lose = Game:addState('Lose')
 
-local failuresound = love.audio.newSource( "/sounds/failuresound.ogg", "static" )
-failuresound:setVolume(0.2)
-
 function Lose:enteredState()
-  bgm:stop()
-  failuresound:play()
   self.waiting = true
   cron.after(0.5, function()
     self.waiting = false
   end)
+
+  self.failuresound = love.audio.newSource( "/sounds/failuresound.ogg", "static" )
+  self.failuresound:setVolume(0.2)
+  self.failuresound:play()
 end
 
 function Lose:draw()
@@ -25,7 +24,6 @@ end
 function Lose:keypressed(key, unicode)
   if self.waiting then return end
   self:gotoState("Main", self.level_name)
-  bgm:play()
 end
 
 function Lose:gamepadpressed(joystick, button)
@@ -34,7 +32,7 @@ function Lose:gamepadpressed(joystick, button)
 end
 
 function Lose:exitedState()
-  bgm:play()
+  self.failuresound:stop()
 end
 
 return Lose

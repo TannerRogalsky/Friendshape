@@ -1,8 +1,5 @@
 local Main = Game:addState('Main')
 
-local friendsound = love.audio.newSource("/sounds/friend.ogg", "static")
-friendsound:setVolume(0.1)
-
 function Main:enteredState(level_name)
   self.level_name = level_name
   love.physics.setMeter(32)
@@ -40,6 +37,8 @@ function Main:enteredState(level_name)
   local radius = 19
   player1 = PlayerCharacter:new(level.player1.x, level.player1.y, radius, radius)
   player1.player_name = "square"
+  player1.jump_sound = self.preloaded_audio['sjump.ogg']
+  player1.jump_sound:setVolume(0.2)
   player1.image = self.preloaded_images["player_square.png"]
   player1.image:setFilter("nearest", "nearest")
   game.preloaded_images["rec_blink.png"]:setFilter("nearest", "nearest")
@@ -67,6 +66,8 @@ function Main:enteredState(level_name)
   radius = 20
   player2 = PlayerCharacter:new(level.player2.x, level.player2.y, radius, radius)
   player2.player_name = "circle"
+  player2.jump_sound = self.preloaded_audio['cjump.ogg']
+  player2.jump_sound:setVolume(0.2)
   player2.image = self.preloaded_images["player_circle.png"]
   player2.image:setFilter("nearest", "nearest")
   game.preloaded_images["pi_blink.png"]:setFilter("nearest", "nearest")
@@ -127,6 +128,16 @@ function Main:enteredState(level_name)
     local x, y, w, h = self.camera:getViewport()
     spawn_cloud(math.random(w), math.random(h))
   end
+
+  local friendsound = self.preloaded_audio['friend.ogg']
+  friendsound:rewind()
+  friendsound:setVolume(0.1)
+  friendsound:play()
+
+  self.bgm = self.preloaded_audio['music1.ogg']
+  self.bgm:setVolume(0.4)
+  self.bgm:setLooping(true)
+  self.bgm:play()
 end
 
 function Main:update(dt)
@@ -209,8 +220,6 @@ end
 function Main:keypressed(key, unicode)
   if key == "r" then
     self:gotoState("Main", self.level_name)
-    friendsound:rewind()
-    friendsound:play()
   elseif key == "escape" then
     self:gotoState("Menu", self.level_name)
   end
@@ -234,6 +243,8 @@ function Main:focus(has_focus)
 end
 
 function Main:exitedState()
+  self.bgm:stop()
+
   cron.reset()
   self.final_screen = g.newImage(g.newScreenshot())
   World:destroy()

@@ -5,6 +5,11 @@ function Title:enteredState()
     self.title_image = self.preloaded_images["friendshape_controls.png"]
     self.title_image:setFilter("nearest", "nearest")
   end
+
+  self.intro_music = self.preloaded_audio['intromusic.ogg']
+  self.intro_music:setVolume(0.5)
+  self.intro_music:setLooping(true)
+  self.intro_music:play()
 end
 
 function Title:draw()

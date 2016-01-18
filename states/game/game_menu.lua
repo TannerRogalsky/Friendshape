@@ -1,19 +1,10 @@
 local Menu = Game:addState('Menu')
 
-intromusic = love.audio.newSource("/sounds/intromusic.ogg", "stream")
-intromusic:play()
-intromusic:setVolume(0.5)
-intromusic:setLooping("true")
-
-local friendsound = love.audio.newSource("/sounds/friend.ogg", "static")
-friendsound:setVolume(0.1)
-
-bgm = love.audio.newSource("/sounds/music1.ogg", "stream")
-
-
 function Menu:enteredState(previous_level_name)
   self.menu_font = g.newFont("fonts/04b03.TTF", 48)
   g.setFont(self.menu_font)
+
+  self.intro_music:play()
 
   self.all_levels = {}
   for index, name in pairs(self.sorted_names) do
@@ -62,15 +53,6 @@ end
 function Menu:keypressed(key, unicode)
   if key == "return" then
     self:gotoState("Main", self.sorted_names[self.selected_level_index])
-
-    -- Stop intro music, play in-game music
-    intromusic:stop()
-    bgm:rewind()
-    friendsound:play()
-    bgm:play()
-    bgm:setVolume(0.4)
-    bgm:setLooping("true")
-
     return
   elseif key == "down" then
     self.selected_level_index = self.selected_level_index + 1
@@ -123,6 +105,9 @@ function Menu:exitedState()
   self.polling = nil
   self.selected_level_index = nil
   self.all_levels = nil
+
+-- Stop intro music, play in-game music
+  self.intro_music:stop()
 end
 
 return Menu
