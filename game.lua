@@ -3,8 +3,8 @@ local Game = class('Game', Base):include(Stateful)
 function Game:initialize(args)
   Base.initialize(self)
 
-  for k,v in pairs(args) do
-    self[k] = v
+  if args.debug then
+    love.audio.setVolume(0)
   end
 
   local joysticks = love.joystick.getJoysticks()
