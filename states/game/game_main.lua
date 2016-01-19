@@ -34,8 +34,11 @@ function Main:enteredState(level_name)
 
   local joysticks = love.joystick.getJoysticks()
 
+  local p1X, p1Y = level.player1.x, level.player1.y
+  local p2X, p2Y = level.player2.x, level.player2.y
+
   local radius = 19
-  player1 = PlayerCharacter:new(level.player1.x, level.player1.y, radius, radius)
+  player1 = PlayerCharacter:new(p1X, p1Y, radius, radius)
   player1.player_name = "square"
   player1.jump_sound = self.preloaded_audio['sjump.ogg']
   player1.jump_sound:setVolume(0.2)
@@ -47,7 +50,7 @@ function Main:enteredState(level_name)
   player1.idle_anim = newAnimation(game.preloaded_images["rec_idle.png"], 21, 21, 0.1, 0)
   player1.current_anim = player1.active_anim
   player1.joystick = joysticks[1]
-  player1.body = love.physics.newBody(World, level.player1.x, level.player1.y, "dynamic")
+  player1.body = love.physics.newBody(World, p1X, p1Y, "dynamic")
   player1.shape = love.physics.newRectangleShape(0, 0, radius, radius)
   player1.fixture = love.physics.newFixture(player1.body, player1.shape)
   player1.fixture:setUserData(player1)
@@ -64,7 +67,7 @@ function Main:enteredState(level_name)
   }
 
   radius = 20
-  player2 = PlayerCharacter:new(level.player2.x, level.player2.y, radius, radius)
+  player2 = PlayerCharacter:new(p2X, p2Y, radius, radius)
   player2.player_name = "circle"
   player2.jump_sound = self.preloaded_audio['cjump.ogg']
   player2.jump_sound:setVolume(0.2)
@@ -76,7 +79,7 @@ function Main:enteredState(level_name)
   player2.idle_anim = newAnimation(game.preloaded_images["pi_idle.png"], 21, 21, 0.1, 0)
   player2.current_anim = player2.active_anim
   player2.joystick = joysticks[2]
-  player2.body = love.physics.newBody(World, level.player2.x, level.player2.y, "dynamic")
+  player2.body = love.physics.newBody(World, p2X, p2Y, "dynamic")
   player2.shape = love.physics.newCircleShape(radius / 2)
   player2.fixture = love.physics.newFixture(player2.body, player2.shape)
   player2.fixture:setUserData(player2)
@@ -93,8 +96,9 @@ function Main:enteredState(level_name)
     }
   }
 
-  rope = love.physics.newRopeJoint( player1.body, player2.body, level.player1.x, level.player1.y, level.player2.x, level.player2.y, 100, true )
-  rope_x, rope_y = 0, 0
+  local rope_length = 100
+  rope = love.physics.newRopeJoint( player1.body, player2.body, p1X, p1Y, p2X, p2Y, rope_length, true)
+  catenary = Catenary(p1X, p1Y, p2X, p2Y, rope_length)
 
   self.rope_segments = {}
   self.rope_segments[0] = player1.image
@@ -143,7 +147,6 @@ end
 function Main:update(dt)
   World:update(dt)
   if World == nil then return end
-  rope_x, rope_y = rope:getReactionForce(1/dt)
 
   for _,trigger in pairs(level.triggers) do
     if trigger.update then trigger:update(dt) end
@@ -164,6 +167,14 @@ function Main:update(dt)
   cx, cy = cx - g.getWidth() / 8, cy - g.getHeight() / 8
   cx, cy = math.floor(cx * level.scale) / level.scale, math.floor(cy * level.scale) / level.scale
   self.camera:setPosition(cx, cy)
+
+  local p1X, p1Y = player1.body:getWorldCenter()
+  local p2X, p2Y = player2.body:getWorldCenter()
+  if p1X < p2X then
+    catenary:updatePoints(p1X, p1Y, p2X, p2Y)
+  else
+    catenary:updatePoints(p2X, p2Y, p1X, p1Y)
+  end
 end
 
 function Main:draw()
@@ -187,9 +198,15 @@ function Main:draw()
   local rx1, ry1, rx2, ry2 = rope:getAnchors()
   local rv = Vector.new(rx2 - rx1, ry2 - ry1)
   local dx, dy = rv:normalized():unpack()
+
+  local dx, dy = rx2 - rx1, ry2 - ry1
+  local player_distance = math.sqrt(dx * dx + dy + dy)
+  dx, dy = dx / player_distance, dy / player_distance
+
   g.setColor(COLORS.white:rgb())
-  for index = 0, rv:len(), 5 do
-    g.draw(self.rope_segments[index % 2], rx1 + dx * index, ry1 + dy * index, 0, 0.25, 0.25)
+  for index = 0, player_distance, 5 do
+    local x =  rx1 + dx * index
+    g.draw(self.rope_segments[index % 2], x, catenary[x], 0, 0.25, 0.25)
   end
 
   g.setColor(COLORS.blue:rgb())

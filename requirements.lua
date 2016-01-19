@@ -31,6 +31,7 @@ Grid = require("lib/grid")
 DictGrid = require("lib/dict_grid")
 Line = require("lib/line")
 Vector = require("lib/vector")
+Catenary = require("lib/caternary")
 
 Base = require("base")
 Game = require("game")
