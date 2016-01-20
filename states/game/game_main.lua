@@ -196,9 +196,6 @@ function Main:draw()
   end
 
   local rx1, ry1, rx2, ry2 = rope:getAnchors()
-  local rv = Vector.new(rx2 - rx1, ry2 - ry1)
-  local dx, dy = rv:normalized():unpack()
-
   local dx, dy = rx2 - rx1, ry2 - ry1
   local player_distance = math.sqrt(dx * dx + dy + dy)
   dx, dy = dx / player_distance, dy / player_distance
