@@ -1,7 +1,7 @@
 local Menu = Game:addState('Menu')
 
 function Menu:enteredState(previous_level_name)
-  self.menu_font = g.newFont("fonts/04b03.TTF", 48)
+  self.menu_font = self.preloaded_fonts['04b03_48']
   g.setFont(self.menu_font)
 
   self.intro_music:play()

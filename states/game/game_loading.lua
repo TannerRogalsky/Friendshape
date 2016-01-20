@@ -26,15 +26,16 @@ function Loading:enteredState()
     end
   end
 
-  local sizes = {12, 14, 16, 20, 24}
-  -- for index, font in ipairs(love.filesystem.getDirectoryItems('fonts')) do
-  --   if font:match('(.*).ttf$') ~= nil then
-  --     for _,size in ipairs(sizes) do
-  --       local key = font .. "_" .. tostring(size)
-  --       self.loader.newFont(self.preloaded_fonts, key, 'fonts/' .. font, size)
-  --     end
-  --   end
-  -- end
+  local sizes = {48}
+  for index, filename in ipairs(love.filesystem.getDirectoryItems('fonts')) do
+    local font = filename:match('(.*).ttf$') or filename:match('(.*).TTF$')
+    if font then
+      for _,size in ipairs(sizes) do
+        local key = font .. "_" .. tostring(size)
+        self.preloaded_fonts[key] = g.newFont('fonts/' .. filename, size)
+      end
+    end
+  end
 
   self.sorted_names = require('levels/list')
   for index, level_name in ipairs(self.sorted_names) do

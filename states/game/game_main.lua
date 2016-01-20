@@ -26,9 +26,6 @@ function Main:enteredState(level_name)
   local Camera = require("lib/camera")
   self.camera = Camera:new()
 
-  self.default_font = g.newFont(16)
-  g.setFont(self.default_font)
-
   level = MapLoader.load(level_name)
   self.camera:setScale(1 / level.scale, 1 / level.scale)
 
