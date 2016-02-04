@@ -7,6 +7,6 @@
 [submodule "lib/lovebird"]
 	path = lib/lovebird
 	url = https://github.com/rxi/lovebird.git
-[submodule ".\\lib\\caternary"]
-	path = .\\lib\\caternary
+[submodule "lib/caternary"]
+	path = lib/caternary
 	url = https://github.com/TannerRogalsky/catenary.lua.git
