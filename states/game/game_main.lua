@@ -29,7 +29,7 @@ function Main:enteredState(level_name)
   level = MapLoader.load(level_name)
   self.camera:setScale(1 / level.scale, 1 / level.scale)
 
-  local joysticks = love.joystick.getJoysticks()
+  local joysticks = love.joystick and love.joystick.getJoysticks() or {}
 
   local p1X, p1Y = level.player1.x, level.player1.y
   local p2X, p2Y = level.player2.x, level.player2.y
@@ -161,7 +161,7 @@ function Main:update(dt)
     num_players = num_players + 1
   end
   cx, cy = cx / num_players, cy / num_players
-  cx, cy = cx - g.getWidth() / 8, cy - g.getHeight() / 8
+  cx, cy = cx - g.getWidth() / 6, cy - g.getHeight() / 6
   cx, cy = math.floor(cx * level.scale) / level.scale, math.floor(cy * level.scale) / level.scale
   self.camera:setPosition(cx, cy)
 
